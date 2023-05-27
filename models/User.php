@@ -1,6 +1,6 @@
 <?php
 
-  class Admin {
+  class User {
 
     public $id;
     public $name;
@@ -11,8 +11,8 @@
     public $bio;
     public $token;
 
-    public function getFullName($adm) {
-      return $adm->name . " " . $adm->lastname;
+    public function getFullName($user) {
+      return $user->name . " " . $user->lastname;
     }
 
     public function generateToken() {
@@ -29,18 +29,18 @@
 
   }
 
-  interface AdminDAOInterface {
+  interface UserDAOInterface {
 
-    public function buildAdmin($data);
-    public function create(Admin $adm, $authAdm = false);
-    public function update(Admin $adm, $redirect = true);
+    public function buildUser($data);
+    public function create(User $user, $authUser = false);
+    public function update(User $user, $redirect = true);
     public function verifyToken($protected = false);
     public function setTokenToSession($token, $redirect = true);
-    public function authenticateAdmin($email, $password);
+    public function authenticateUser($email, $password);
     public function findByEmail($email);
     public function findById($id);
     public function findByToken($token);
     public function destroyToken();
-    public function changePassword(Admin $adm);
+    public function changePassword(User $user);
 
   }

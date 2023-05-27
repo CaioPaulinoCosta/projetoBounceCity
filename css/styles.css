@@ -64,5 +64,17 @@ main {
   border-color: #F04E3D;
 }
 
+/* Login */
+.login-form-title h1 {
+  color: #4E1B1C;
+  font-size: 64px;
+}
+
+.login-form {
+  color: #4E1B1C;
+  font-size: 24px;
+  font-weight: 500;
+}
+
 /* Footer */
 

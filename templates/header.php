@@ -28,14 +28,14 @@
 <header>
   <nav class="navbar navbar-expand bg-custom">
     <div class="container-fluid">
-      <a style="padding-left: 150px;" class="navbar-brand" href="#"><h1 style="color: #4E1B1C;font-weight: 700;">Bounce<span style="color: #FF8F1F;font-weight: 700;" class="logoColoredText"> City</span></h1></a>
+      <a style="padding-left: 150px;" class="navbar-brand" href="<?= $BASE_URL ?>index.php"><h1 style="color: #4E1B1C;font-weight: 700;">Bounce<span style="color: #FF8F1F;font-weight: 700;" class="logoColoredText"> City</span></h1></a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse justify-content-end" id="navbarNav" style="padding-right: 100px;">
         <ul class="navbar-nav ml-auto">
           <li class="nav-item">
-            <a class="nav-link" href="#">Login</a>
+            <a class="nav-link" href="<?= $BASE_URL ?>loginUsers.php">Login</a>
           </li>
         </ul>
       </div>

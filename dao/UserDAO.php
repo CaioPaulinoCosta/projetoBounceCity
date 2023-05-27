@@ -1,9 +1,9 @@
 <?php
 
-  require_once("models/Admin.php");
+  require_once("models/User.php");
   require_once("models/Message.php");
 
-  class AdminDAO implements AdminDAOInterface {
+  class UserDAO implements UserDAOInterface {
 
     private $conn;
     private $url;
@@ -15,48 +15,48 @@
       $this->message = new Message($url);
     }
 
-    public function buildAdmin($data) {
+    public function buildUser($data) {
 
-      $adm = new Admin();
+      $user = new User();
 
-      $adm->id = $data["id"];
-      $adm->name = $data["name"];
-      $adm->lastname = $data["lastname"];
-      $adm->email = $data["email"];
-      $adm->password = $data["password"];
-      $adm->image = $data["image"];
-      $adm->bio = $data["bio"];
-      $adm->token = $data["token"];
+      $user->id = $data["id"];
+      $user->name = $data["name"];
+      $user->lastname = $data["lastname"];
+      $user->email = $data["email"];
+      $user->password = $data["password"];
+      $user->image = $data["image"];
+      $user->bio = $data["bio"];
+      $user->token = $data["token"];
 
-      return $adm;
+      return $user;
 
     }
 
-    public function create(Admin $adm, $authAdm = false) {
+    public function create(User $user, $authUser = false) {
 
-      $stmt = $this->conn->prepare("INSERT INTO admins(
+      $stmt = $this->conn->prepare("INSERT INTO users(
           name, lastname, email, password, token
         ) VALUES (
           :name, :lastname, :email, :password, :token
         )");
 
-      $stmt->bindParam(":name", $adm->name);
-      $stmt->bindParam(":lastname", $adm->lastname);
-      $stmt->bindParam(":email", $adm->email);
-      $stmt->bindParam(":password", $adm->password);
-      $stmt->bindParam(":token", $adm->token);
+      $stmt->bindParam(":name", $user->name);
+      $stmt->bindParam(":lastname", $user->lastname);
+      $stmt->bindParam(":email", $user->email);
+      $stmt->bindParam(":password", $user->password);
+      $stmt->bindParam(":token", $user->token);
 
       $stmt->execute();
 
       // Autenticar usuário, caso auth seja true
-      if($authAdm) {
-        $this->setTokenToSession($adm->token);
+      if($authUser) {
+        $this->setTokenToSession($user->token);
       }
 
     }
 
-    public function update(Admin $adm, $redirect = true) {
-      $stmt = $this->conn->prepare("UPDATE admins SET
+    public function update(User $user, $redirect = true) {
+      $stmt = $this->conn->prepare("UPDATE users SET
         name = :name,
         lastname = :lastname,
         email = :email,
@@ -66,20 +66,20 @@
         WHERE id = :id
       ");
 
-      $stmt->bindParam(":name", $adm->name);
-      $stmt->bindParam(":lastname", $adm->lastname);
-      $stmt->bindParam(":email", $adm->email);
-      $stmt->bindParam(":image", $adm->image);
-      $stmt->bindParam(":bio", $adm->bio);
-      $stmt->bindParam(":token", $adm->token);
-      $stmt->bindParam(":id", $adm->id);
+      $stmt->bindParam(":name", $user->name);
+      $stmt->bindParam(":lastname", $user->lastname);
+      $stmt->bindParam(":email", $user->email);
+      $stmt->bindParam(":image", $user->image);
+      $stmt->bindParam(":bio", $user->bio);
+      $stmt->bindParam(":token", $user->token);
+      $stmt->bindParam(":id", $user->id);
 
       $stmt->execute();
 
       if($redirect) {
 
         // Redireciona para o perfil do usuario
-        $this->message->setMessage("Dados atualizados com sucesso!", "success", "editProfileAdm.php");
+        $this->message->setMessage("Dados atualizados com sucesso!", "success", "editProfileUser.php");
 
       }
 
@@ -92,10 +92,10 @@
         // Pega o token da session
         $token = $_SESSION["token"];
 
-        $adm = $this->findByToken($token);
+        $user = $this->findByToken($token);
 
-        if($adm) {
-          return $adm;
+        if($user) {
+          return $user;
         } else if($protected) {
 
           // Redireciona usuário não autenticado
@@ -120,30 +120,30 @@
       if($redirect) {
 
         // Redireciona para o perfil do usuario
-        $this->message->setMessage("Seja bem-vindo!", "success", "editProfileAdm.php");
+        $this->message->setMessage("Seja bem-vindo!", "success", "editProfileUser.php");
 
       }
 
     }
 
-    public function authenticateAdmin($email, $password) {
+    public function authenticateUser($email, $password) {
 
-        $adm = $this->findByEmail($email);
+      $user = $this->findByEmail($email);
 
-      if($adm) {
+      if($user) {
 
         // Checar se as senhas batem
-        if(password_verify($password, $adm->password)) {
+        if(password_verify($password, $user->password)) {
 
           // Gerar um token e inserir na session
-          $token = $adm->generateToken();
+          $token = $user->generateToken();
 
           $this->setTokenToSession($token, false);
 
           // Atualizar token no usuário
-          $adm->token = $token;
+          $user->token = $token;
 
-          $this->update($adm, false);
+          $this->update($user, false);
 
           return true;
 
@@ -163,7 +163,7 @@
 
       if($email != "") {
 
-        $stmt = $this->conn->prepare("SELECT * FROM admins WHERE email = :email");
+        $stmt = $this->conn->prepare("SELECT * FROM users WHERE email = :email");
 
         $stmt->bindParam(":email", $email);
 
@@ -172,9 +172,9 @@
         if($stmt->rowCount() > 0) {
 
           $data = $stmt->fetch();
-          $adm = $this->buildAdmin($data);
+          $user = $this->buildUser($data);
           
-          return $adm;
+          return $user;
 
         } else {
           return false;
@@ -190,7 +190,7 @@
 
       if($id != "") {
 
-        $stmt = $this->conn->prepare("SELECT * FROM admins WHERE id = :id");
+        $stmt = $this->conn->prepare("SELECT * FROM users WHERE id = :id");
 
         $stmt->bindParam(":id", $id);
 
@@ -199,9 +199,9 @@
         if($stmt->rowCount() > 0) {
 
           $data = $stmt->fetch();
-          $adm = $this->buildAdmin($data);
+          $user = $this->buildUser($data);
           
-          return $adm;
+          return $user;
 
         } else {
           return false;
@@ -216,7 +216,7 @@
 
       if($token != "") {
 
-        $stmt = $this->conn->prepare("SELECT * FROM admins WHERE token = :token");
+        $stmt = $this->conn->prepare("SELECT * FROM users WHERE token = :token");
 
         $stmt->bindParam(":token", $token);
 
@@ -225,9 +225,9 @@
         if($stmt->rowCount() > 0) {
 
           $data = $stmt->fetch();
-          $adm = $this->buildAdmin($data);
+          $user = $this->buildUser($data);
           
-          return $adm;
+          return $user;
 
         } else {
           return false;
@@ -249,20 +249,20 @@
 
     }
 
-    public function changePassword(Admin $adm) {
+    public function changePassword(User $user) {
 
-      $stmt = $this->conn->prepare("UPDATE admins SET
+      $stmt = $this->conn->prepare("UPDATE users SET
         password = :password
         WHERE id = :id
       ");
 
-      $stmt->bindParam(":password", $adm->password);
-      $stmt->bindParam(":id", $adm->id);
+      $stmt->bindParam(":password", $user->password);
+      $stmt->bindParam(":id", $user->id);
 
       $stmt->execute();
 
       // Redirecionar e apresentar a mensagem de sucesso
-      $this->message->setMessage("Senha alterada com sucesso!", "success", "editProfileAdm.php");
+      $this->message->setMessage("Senha alterada com sucesso!", "success", "editProfileUser.php");
 
     }
 
