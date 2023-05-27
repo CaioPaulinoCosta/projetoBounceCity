@@ -32,5 +32,13 @@ main {
   height: 245px;
 }
 
+.main-post-card {
+  border-left: 5px solid #FF8F1F;
+  height: 40px;
+  margin-top: 10px;
+  padding-left: 5px;
+  margin-bottom: 20px;
+}
+
 /* Footer */
 
