@@ -40,5 +40,29 @@ main {
   margin-bottom: 20px;
 }
 
+/* Register */
+.register-form-title h1{
+  color: #4E1B1C;
+  font-size: 64px;
+}
+
+.register-form {
+  color: #4E1B1C;
+  font-size: 24px;
+  font-weight: 500;
+}
+
+.btn-primary {
+  background-color: #F4823F;
+  color: #D5E4EC;
+  border-color: #F4823F;
+}
+
+.btn-primary:hover {
+  background-color: #F04E3D;
+  color: #D5E4EC;
+  border-color: #F04E3D;
+}
+
 /* Footer */
 
