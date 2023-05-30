@@ -1,80 +1,265 @@
-@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@300;400;500;700;900&display=swap');
-
-body {
-  font-family: 'Raleway', sans-serif;
+* {
+    font-family: 'Montserrat', sans-serif;
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
 }
 
-/* Header */
-.bg-custom {
-  background-color: #9ED0DC;
+html {
+    min-height: 100vh;
+    position: relative;
 }
 
-.nav-link {
-  color: #4E1B1C;
-  font-weight: 400;
-}
-
-.nav-link:hover {
-  color: #FF8F1F;
-}
-
-/* Home */
 main {
-  background-color: #D5E4EC;
+    margin-bottom: 250px;
 }
 
-.mainBlodCard img {
-  width: 100%;
-  height: 800px;
+/* NAVBAR */
+#logo {
+    position: absolute;
+    top: 10px;
+    left: 9.5%;
 }
 
-.card-img-top {
-  height: 245px;
+#logo img {
+    width: 50px;
 }
 
-.main-post-card {
-  border-left: 5px solid #FF8F1F;
-  height: 40px;
-  margin-top: 10px;
-  padding-left: 5px;
-  margin-bottom: 20px;
+#navbar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #00B6F1;
+    padding: 20px;
+    text-transform: uppercase;
+    list-style: none;
 }
 
-/* Register */
-.register-form-title h1{
-  color: #4E1B1C;
-  font-size: 64px;
+#navbar li {
+    margin: 0 10px;
+    padding: 5px;
 }
 
-.register-form {
-  color: #4E1B1C;
-  font-size: 24px;
-  font-weight: 500;
+#navbar .nav-link {
+    color: #fff;
+    text-decoration: none;
+    transition: .5s;
+    font-size: 14px;
 }
 
-.btn-primary {
-  background-color: #F4823F;
-  color: #D5E4EC;
-  border-color: #F4823F;
+.header-profile-image {
+    width: 42px;
+    height: 42px;
+    border-radius: 100%;
+    background-size: cover;
+    background-position: center;
 }
 
-.btn-primary:hover {
-  background-color: #F04E3D;
-  color: #D5E4EC;
-  border-color: #F04E3D;
+#navbar .nav-link:hover {
+    color: #999;
 }
 
-/* Login */
-.login-form-title h1 {
-  color: #4E1B1C;
-  font-size: 64px;
+/* HOME */
+#title-container {
+    min-width: 500px;
+    text-align: center;
+    margin-top: 30px;
 }
 
-.login-form {
-  color: #4E1B1C;
-  font-size: 24px;
-  font-weight: 500;
+#title-container h1 {
+    font-size: 50px;
 }
 
-/* Footer */
+#title-container p {
+    margin-top: 10px;
+    text-transform: uppercase;
+    color: #999;
+}
 
+#posts-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    margin-top: 30px;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.post-box:first-child {
+    min-width: 100%;
+}
+
+.post-box {
+    flex: 1 1 0;
+    margin-bottom: 20px;
+}
+
+.post-box:nth-child(3) {
+    margin: 0 1%;
+}
+
+.post-box img {
+    width: 100%;
+}
+
+.post-box .post-title {
+    font-size: 24px;
+    margin: 10px 0;
+}
+
+.post-box .post-title a {
+    color: #000;
+    transition: .5s;
+}
+
+.post-box .post-title a:hover {
+    color: #999;
+    transition: .5s;
+}
+
+.post-box .post-description {
+    color: #666;
+}
+
+.tags-container{
+    margin-top: 10px;
+}       
+
+.tags-container a {
+    font-size: 14px;
+    color: #333;
+    display: inline-block;
+    margin-right: 5px;
+}
+
+/* POST */
+#post-container {
+    display: grid;
+    grid-template-columns: 75% 25%;
+    grid-template-rows: auto;
+    grid-template-areas: "main sidebar";
+    grid-gap: 10px;
+    padding-top: 30px;
+    max-width: 1200px;
+    margin: 0 auto;
+    margin-bottom: 250px;
+}
+
+.content-container {
+    grid-area: main; 
+}
+
+#main-title {
+    font-size: 36px;
+    margin-bottom: 30px;
+}
+
+#post-description {
+    font-style: italic;
+    margin-bottom: 40px;
+}
+
+.post-content {
+    line-height: 1.8;
+    margin: 10px 0;
+}
+
+.img-container {
+    margin-bottom: 30px;
+
+}
+
+.img-container img {
+    width: 60%;
+    
+}
+
+/* POST ASIDE */
+.nav-container {
+    grid-area: sidebar;
+}
+
+#tags-title, #categories-title {
+    font-size: 24px;
+    margin-bottom: 10px;
+    background-color: #000;
+    color: #Fff;
+    text-align: center;
+    padding: 10px;
+    font-weight: 300;
+}
+
+#tags-list, #categories-list {
+    list-style: none;
+}
+
+#tags-list li, #categories-list li {
+    margin-bottom: 10px;
+}
+
+#tags-list a, #categories-list a {
+    color: #666;
+    transition: .5s;
+}
+
+#tags-list a:hover, #categories-list a:hover {
+    color: #000;
+}
+
+/* FOOTER */
+
+footer {
+    color: #Fff;
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+    text-align: center;
+    background-color: #00B6F1;
+    padding: 50px 0;
+}
+
+/* MOBILE */
+@media(max-width: 480px) {
+     header {
+        width: 100%;
+     }
+     
+     #logo {
+        display: block;
+        position: relative;
+        margin: 0 auto;
+        left: 0;
+        width: 50px;
+     }
+
+     #navbar {
+        display: none;
+     }
+
+     #title-container {
+        min-width: 100%;
+        margin-top: 20px;
+     }
+
+    #posts-container {
+        margin-top: 20px;
+    }
+
+    .post-box {
+        flex: 100% 1 0;
+        padding: 15px;
+        margin: 0;
+    }
+
+    /* POST MOBILE */
+    #post-container {
+        grid-template-columns: 100%;
+        padding: 15px;
+        grid-template-areas: "main"
+        "sidebar";
+    }
+
+    .img-container img {
+        width: 100%;
+    }
+
+}
