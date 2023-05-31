@@ -1,5 +1,7 @@
+  @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700;800&display=swap');
+
 * {
-    font-family: 'Montserrat', sans-serif;
+    font-family: 'Open Sans', sans-serif;
     padding: 0;
     margin: 0;
     box-sizing: border-box;
@@ -12,6 +14,10 @@ html {
 
 main {
     margin-bottom: 250px;
+}
+
+.bold {
+    font-weight: 700;
 }
 
 /* NAVBAR */
@@ -47,9 +53,9 @@ main {
     font-size: 14px;
 }
 
-.header-profile-image {
-    width: 42px;
-    height: 42px;
+.login-profile-image {
+    width: 124px;
+    height: 124px;
     border-radius: 100%;
     background-size: cover;
     background-position: center;
@@ -58,6 +64,43 @@ main {
 #navbar .nav-link:hover {
     color: #999;
 }
+
+.msg {
+    width: 100%;
+    margin: 0 auto;
+    padding: 5px;
+    border: solid 1px #000;
+    text-align: center;
+  }
+  
+  
+  .msg.error {
+    color: #842029;
+    background-color: #F8D7DA;
+    border-color: #F5C2C7;
+  }
+  
+  .msg.success {
+    color: #0F5132;
+    background-color: #DEEBA7;
+    border-color: #DEEBA7;
+  }
+  
+  /* LOGIN */
+  .header-profile-image {
+    width: 42px;
+    height: 42px;
+    border-radius: 100%;
+    background-size: cover;
+    background-position: center;
+  }
+
+  /* ADM PROFILE */
+  .adm-profile-card {
+    display: flex;
+    flex-wrap: wrap;
+    margin-left: 90px;
+  }
 
 /* HOME */
 #title-container {
